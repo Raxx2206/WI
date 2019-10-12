@@ -1,6 +1,5 @@
 package study.RandomSet;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -78,7 +77,7 @@ public class RandomSet {
         return capacity;
     }
 
-    public static RandomSet union(@NotNull RandomSet rs1, @NotNull RandomSet rs2) {
+    public static RandomSet union(RandomSet rs1, RandomSet rs2) {
         RandomSet tmp = new RandomSet(rs1.capacity + rs2.capacity);
         for (int i = 0; i < rs1.lastPos; ++i)
             tmp.add(rs1.get(i));
@@ -88,7 +87,7 @@ public class RandomSet {
         return tmp;
     }
 
-    public static RandomSet intersection(@NotNull RandomSet rs1, @NotNull RandomSet rs2) {
+    public static RandomSet intersection(RandomSet rs1, RandomSet rs2) {
         RandomSet tmp = new RandomSet(rs1.capacity + rs2.capacity);
         for (int i = 0; i < rs1.lastPos; ++i) {
             if (rs2.contains(rs1.get(i)))
@@ -103,7 +102,7 @@ public class RandomSet {
         return tmp;
     }
 
-    public static RandomSet difference(@NotNull RandomSet rs1, RandomSet rs2) {
+    public static RandomSet difference(RandomSet rs1, RandomSet rs2) {
         RandomSet tmp = new RandomSet(rs1.getCapacity());
 
         boolean[] flags = new boolean[rs1.getCapacity()];
