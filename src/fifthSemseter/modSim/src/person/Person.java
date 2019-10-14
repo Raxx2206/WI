@@ -2,7 +2,7 @@ package fifthSemseter.modSim.src.person;
 
 import java.io.Serializable;
 
-public class Person implements Serializable {
+public class Person implements Serializable, Comparable<Person> {
     private String lastname, forename, street, houseNr;
 
     public Person(String lastname, String forename, String street, String houseNr) {
@@ -52,5 +52,15 @@ public class Person implements Serializable {
                 ", street='" + street + '\'' +
                 ", houseNr='" + houseNr + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Person personToCompare) {
+        int compareValue = lastname.compareTo(personToCompare.lastname);
+
+        if (compareValue == 0)
+            return forename.compareTo(personToCompare.forename);
+        else
+            return compareValue;
     }
 }

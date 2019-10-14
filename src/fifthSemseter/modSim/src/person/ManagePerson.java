@@ -1,6 +1,8 @@
 package fifthSemseter.modSim.src.person;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Vector;
 
 public class ManagePerson implements Serializable {
@@ -14,6 +16,22 @@ public class ManagePerson implements Serializable {
         } catch (PersonNotFound personNotFound) {
             people.add(p);
         }
+    }
+
+    public ArrayList<Person> getAll(String lastname, String forename) throws PersonNotFound {
+
+        ArrayList<Person> allPersons = new ArrayList<>();
+
+        for (Person p : people) {
+            if (p.getLastname().equals(lastname) && p.getForename().equals(forename)) {
+                allPersons.add(p);
+            }
+        }
+
+        if (allPersons.size() > 0)
+            return allPersons;
+
+        throw new PersonNotFound(lastname, forename);
     }
 
     public Person get(String lastname, String forename) throws PersonNotFound {
@@ -40,16 +58,22 @@ public class ManagePerson implements Serializable {
         throw new PersonNotFound(lastname, forename);
     }
 
+    public void sort() {
+        Collections.sort(people);
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Person p : people)
+        for (Person p : people) {
             stringBuilder.append(p);
+            stringBuilder.append('\n');
+        }
 
         return stringBuilder.toString();
     }
 
-    private class PersonNotFound extends Throwable {
+    public class PersonNotFound extends Throwable {
         private String lastname, forename;
 
         public PersonNotFound(String lastname, String forename) {
