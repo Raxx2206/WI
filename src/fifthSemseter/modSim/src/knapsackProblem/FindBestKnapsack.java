@@ -4,6 +4,7 @@ import java.util.Vector;
 
 public class FindBestKnapsack {
     private Vector<Item> items = new Vector<>();
+    private Vector<Knapsack> knapsacks = new Vector<>();
 
     public void newItem(double value, double volume) {
         newItem(new Item(value, volume));
@@ -13,19 +14,30 @@ public class FindBestKnapsack {
         items.add(i);
     }
 
-    public Knapsack findBest(int sackPos, Knapsack knapsack) {
-        if (sackPos < items.size()) {
-            if (knapsack == null) knapsack = new Knapsack();
-
-            knapsack.add(items.get(sackPos));
-
-            findBest(++sackPos, knapsack);
-
-            findBest(++sackPos, null);
+    public void findBest(int itemPos, Knapsack knapsack) {
+        if (itemPos >= items.size()) {
+            knapsacks.add(knapsack);
+            return;
         }
 
-        System.out.println(knapsack);
+        Knapsack newKnapsack = new Knapsack(knapsack);
 
-        return null;
+        knapsack.add(items.get(itemPos));
+
+        findBest(itemPos + 1, knapsack);
+
+        findBest(itemPos + 1, newKnapsack);
+
+    }
+
+    public void sort() {
+        knapsacks.sort(Knapsack::compareTo);
+    }
+
+    @Override
+    public String toString() {
+        return "FindBestKnapsack{" +
+                "knapsacks=" + knapsacks +
+                '}';
     }
 }
