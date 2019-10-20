@@ -15,14 +15,12 @@ public class FindBestKnapsack {
     }
 
     public void findBest(int itemPos, Knapsack knapsack) {
-        if (itemPos >= items.size()) {
+        if (itemPos >= items.size() || knapsack.getVolume() >= knapsack.MAX_VOLUME) {
             knapsacks.add(knapsack);
             return;
         }
 
         Knapsack newKnapsack = new Knapsack(knapsack);
-
-        knapsack.add(items.get(itemPos));
 
         findBest(itemPos + 1, knapsack);
 
