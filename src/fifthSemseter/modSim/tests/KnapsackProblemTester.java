@@ -12,15 +12,15 @@ public class KnapsackProblemTester {
         findBest.newItem(5, 8);
         findBest.newItem(5,8);
         findBest.newItem(6,6);
-//        findBest.newItem(8,5);
-//        findBest.newItem(10, 10);
-//        findBest.newItem(11,5);
-//        findBest.newItem(12,10);
-//        findBest.newItem(15, 17);
-//        findBest.newItem(15,20);
-//        findBest.newItem(30, 20);
+        findBest.newItem(8, 5);
+        findBest.newItem(10, 10);
+        findBest.newItem(11, 5);
+        findBest.newItem(12, 10);
+        findBest.newItem(15, 17);
+        findBest.newItem(15, 20);
+        findBest.newItem(30, 20);
 
-        findBest.findBest(0, new Knapsack());
+        findBest.findBest(0, new Knapsack(30));
 
         findBest.sort();
         System.out.println(findBest);

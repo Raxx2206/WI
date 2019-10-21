@@ -1,35 +1,34 @@
 package fifthSemseter.modSim.src.knapsackProblem;
 
-import java.util.ArrayList;
-import java.util.Objects;
+import java.util.Vector;
 
 public class Knapsack implements Comparable<Knapsack> {
     private static int id = 0;
 
     public final int ID;
     public final double MAX_VOLUME;
-    private ArrayList<Item> items;
+    private Vector<Item> items;
     private double knapsackValue = .0, knapsackVolume = .0;
     private boolean isRefilled = true;
 
     public Knapsack() {
-        items = new ArrayList<>();
         ID = id++;
         MAX_VOLUME = 30.0;
+        items = new Vector<>();
     }
 
     public Knapsack(double maxVolume) {
-        items = new ArrayList<>();
         ID = id++;
         MAX_VOLUME = maxVolume;
+        items = new Vector<>();
     }
 
     public Knapsack(Knapsack k) {
-        items = new ArrayList<>();
         ID = id++;
         MAX_VOLUME = k.MAX_VOLUME;
 
-        k.items.stream().filter(Objects::nonNull).forEach(i -> items.add(new Item(i)));
+        items = new Vector<>(k.items);
+        calculateKnapsack();
     }
 
     public boolean add(double value, double volume) {
@@ -37,9 +36,8 @@ public class Knapsack implements Comparable<Knapsack> {
     }
 
     public boolean add(Item i) {
-        isRefilled = true;
-
-        if (knapsackVolume + i.getVOLUME() <= MAX_VOLUME) {
+        if (Double.compare((getVolume() + i.getVOLUME()), MAX_VOLUME) <= 0) {
+            isRefilled = true;
             items.add(i);
             return true;
         }
@@ -87,6 +85,7 @@ public class Knapsack implements Comparable<Knapsack> {
                 ", items=" + items +
                 ", knapsackValue=" + knapsackValue +
                 ", knapsackVolume=" + knapsackVolume +
+                ", MAX=" + MAX_VOLUME +
                 "}\n\n";
     }
 
@@ -99,6 +98,6 @@ public class Knapsack implements Comparable<Knapsack> {
 //        else
 //            return -1;
 
-        return Double.compare(knapsackValue, o.knapsackValue);
+        return Double.compare(o.getValue(), getValue());
     }
 }

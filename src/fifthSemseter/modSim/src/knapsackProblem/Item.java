@@ -14,7 +14,7 @@ public class Item {
     public Item(Item i) {
         this.ID = i.ID;
         this.VALUE = i.VALUE;
-        this.VOLUME = i.VALUE;
+        this.VOLUME = i.VOLUME;
     }
 
     public int getID() {
