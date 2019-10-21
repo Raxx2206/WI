@@ -1,33 +1,33 @@
 package fifthSemseter.modSim.src.knapsackProblem;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 public class Knapsack implements Comparable<Knapsack> {
     private static int id = 0;
 
     public final int ID;
     public final double MAX_VOLUME;
-    private Vector<Item> items;
+    private ArrayList<Item> items;
     private double knapsackValue = .0, knapsackVolume = .0;
     private boolean isRefilled = true;
 
     public Knapsack() {
         ID = id++;
         MAX_VOLUME = 30.0;
-        items = new Vector<>();
+        items = new ArrayList<>();
     }
 
     public Knapsack(double maxVolume) {
         ID = id++;
         MAX_VOLUME = maxVolume;
-        items = new Vector<>();
+        items = new ArrayList<>();
     }
 
     public Knapsack(Knapsack k) {
         ID = id++;
         MAX_VOLUME = k.MAX_VOLUME;
 
-        items = new Vector<>(k.items);
+        items = new ArrayList<>(k.items);
         calculateKnapsack();
     }
 

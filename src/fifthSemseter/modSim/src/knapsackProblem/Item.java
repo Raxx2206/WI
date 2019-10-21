@@ -29,11 +29,6 @@ public class Item {
         return VOLUME;
     }
 
-//    @Override
-//    public String toString() {
-//        return ID+1 + "";
-//    }
-
     @Override
     public String toString() {
         return "Item{" +
