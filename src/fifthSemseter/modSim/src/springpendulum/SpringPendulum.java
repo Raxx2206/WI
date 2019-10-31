@@ -36,7 +36,6 @@ public class SpringPendulum {
     public static void main(String[] args) {
         plot.addLegend("SOUTH");
 
-//        simulatePendulum(new PendulumPositionHeavyInAir());
         simulatePendulum(new PendulumPositionLightInAir());
         simulatePendulum(new PendulumPositionMediumInAir());
         simulatePendulum(new PendulumPositionHeavyInAir());
