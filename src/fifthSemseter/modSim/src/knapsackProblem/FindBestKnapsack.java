@@ -6,7 +6,7 @@ public class FindBestKnapsack {
     private Vector<Item> items = new Vector<>();
     private Vector<Knapsack> knapsacks = new Vector<>();
 
-    public void newItem(double value, double volume) {
+    public void newItem(double volume, double value) {
         newItem(new Item(value, volume));
     }
 
