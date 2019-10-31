@@ -1,16 +1,17 @@
 package fifthSemseter.modSim.src.worldmodell;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.stream.DoubleStream;
 
 public class MyClass {
-    public final int ITERATION_AMOUNT = 250;
+    public final int ITERATION_AMOUNT = 200;
     public final double C;
-    public double[] population, ecologicalDamage, consumption, act;
+    public Map<String, Double[]> systemParameter;
+    private double[] population, ecologicalDamage, consumption, act;
     private boolean isComputed = false;
 
     public MyClass(double c) {
@@ -30,7 +31,7 @@ public class MyClass {
      * @param iterationIndex time
      */
     private void compute(double v, double l, double k, double h, int iterationIndex) {
-        if (iterationIndex == 250) {
+        if (iterationIndex == ITERATION_AMOUNT) {
             isComputed = true;
             return;
         }
@@ -47,45 +48,49 @@ public class MyClass {
                 ++iterationIndex);
     }
 
-    public ObservableList<Series<String, Double>> getData() {
-        if (!isComputed)
-            compute(0, 1, 0, 0, 0);
+    public void compute() {
+        compute(0, 1, 0, 0, 0);
+    }
 
-        ObservableList<Series<String, Double>> data = FXCollections.observableArrayList();
-        data.addAll(arrayToSeries("Poulation", population),
-                    arrayToSeries("Ecological Damage", ecologicalDamage),
-                    arrayToSeries("Consumotion", consumption),
-                    arrayToSeries("Act", act));
+    public ArrayList<Series<String, Double>> getData() {
+        if (!isComputed)
+            compute();
+
+        ArrayList<Series<String, Double>> data = new ArrayList<>();
+        data.add(arrayToSeries("Poulation (v)", population));
+        data.add(arrayToSeries("Ecological Damage (l)", ecologicalDamage));
+        data.add(arrayToSeries("Consumption (k)", consumption));
+        data.add(arrayToSeries("Act (h)", act));
 
         return data;
     }
 
-    public ObservableList<Series<String, Double>> getPopulation() {
+    public double[] getPopulation() {
         if (!isComputed)
-            compute(0, 1, 0, 0, 0);
+            compute();
 
-        return FXCollections.observableArrayList(arrayToSeries("Population", population));
+        return population;
     }
 
-    public ObservableList<Series<String, Double>> getEcologicalDamage() {
+    public double[] getEcologicalDamage() {
         if (!isComputed)
-            compute(0, 1, 0, 0, 0);
+            compute();
 
-        return FXCollections.observableArrayList(arrayToSeries("ecologicalDamage", ecologicalDamage));
+        return ecologicalDamage;
     }
 
-    public ObservableList<Series<String, Double>> getConsumption() {
+    public double[] getConsumption() {
         if (!isComputed)
-            compute(0, 1, 0, 0, 0);
+            compute();
 
-        return FXCollections.observableArrayList(arrayToSeries("consumption", consumption));
+        return consumption;
     }
 
-    public ObservableList<Series<String, Double>> getAct() {
+    public double[] getAct() {
         if (!isComputed)
-            compute(0, 1, 0, 0, 0);
+            compute();
 
-        return FXCollections.observableArrayList(arrayToSeries("Act", act));
+        return act;
     }
 
     private Series<String, Double> arrayToSeries(String name, double[] array) {
