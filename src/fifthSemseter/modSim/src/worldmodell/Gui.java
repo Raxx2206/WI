@@ -24,7 +24,6 @@ public class Gui extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         stage.setTitle("World modell");
-
         stage.setScene(new Scene(getView(), 800, 500));
         stage.show();
     }
