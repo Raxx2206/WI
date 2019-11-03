@@ -1,4 +1,4 @@
-package fifthSemseter.modSim.src.worldmodell;
+package fifthSemseter.modSim.src.worldmodell_old;
 
 
 import javafx.application.Application;
@@ -12,10 +12,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.stream.DoubleStream;
 
 public class Gui extends Application {
 
-    private MyClass mc = new MyClass(0.25);
+    private MyClass mc = new MyClass(0.22);
 
     public static void main(String[] args) {
         launch(args);
@@ -23,9 +24,11 @@ public class Gui extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setTitle("World modell");
+        stage.setTitle("World model");
         stage.setScene(new Scene(getView(), 800, 500));
         stage.show();
+
+        DoubleStream.of(mc.getPopulation()).forEach(System.out::println);
     }
 
     public VBox getView() {
@@ -44,7 +47,7 @@ public class Gui extends Application {
 
         LineChart lc = new LineChart<>(xAxis, yAxis);
         lc.setData(FXCollections.observableArrayList(data));
-        lc.setTitle("World Model");
+        lc.setTitle(data.getName());
 
         return lc;
     }

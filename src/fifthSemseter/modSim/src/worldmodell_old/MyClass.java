@@ -1,16 +1,14 @@
-package fifthSemseter.modSim.src.worldmodell;
+package fifthSemseter.modSim.src.worldmodell_old;
 
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.stream.DoubleStream;
 
 public class MyClass {
-    public final int ITERATION_AMOUNT = 200;
+    public final int ITERATION_AMOUNT = 250;
     public final double C;
-    public Map<String, Double[]> systemParameter;
     private double[] population, ecologicalDamage, consumption, act;
     private boolean isComputed = false;
 
@@ -36,10 +34,17 @@ public class MyClass {
             return;
         }
 
+//        just the deltas
         population[iterationIndex] = -0.1 * l + 0.3 * k - 0.1 * h;
         ecologicalDamage[iterationIndex] = v + k;
         consumption[iterationIndex] = 1.1 * l - h;
         act[iterationIndex] = C * l;
+
+//        population[iterationIndex] = v - 0.1 * l + 0.3 * k - 0.1 * h;
+//        ecologicalDamage[iterationIndex] = l + v + k;
+//        consumption[iterationIndex] = k + 1.1 * l - h;
+//        act[iterationIndex] = h + C * l;
+
 
         compute(population[iterationIndex],
                 ecologicalDamage[iterationIndex],
@@ -57,7 +62,7 @@ public class MyClass {
             compute();
 
         ArrayList<Series<String, Double>> data = new ArrayList<>();
-        data.add(arrayToSeries("Poulation (v)", population));
+        data.add(arrayToSeries("Population (v)", population));
         data.add(arrayToSeries("Ecological Damage (l)", ecologicalDamage));
         data.add(arrayToSeries("Consumption (k)", consumption));
         data.add(arrayToSeries("Act (h)", act));
@@ -98,8 +103,8 @@ public class MyClass {
         series.setName(name);
 
         DoubleStream.of(array)
-                    .forEach(value -> series.getData()
-                                            .add(new XYChart.Data<>(Integer.toString(series.getData().size()), value)));
+                .forEach(value -> series.getData()
+                        .add(new XYChart.Data<>(Integer.toString(series.getData().size()), value)));
 
         return series;
     }
