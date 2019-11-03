@@ -47,10 +47,10 @@ public class Gui extends Application {
         HBox act = new HBox();
 
         try {
-            population.getChildren().addAll(createLineChart("Population", data.getPopulationDelta(), data.getPopulationSum()));
-            ecologicalDamage.getChildren().addAll(createLineChart("Ecological Damage", data.getEcologicalDamageDelta(), data.getEcologicalDamageSum()));
-            consumption.getChildren().addAll(createLineChart("Consumption", data.getConsumptionDelta(), data.getConsumptionSum()));
-            act.getChildren().addAll(createLineChart("Act", data.getActDelta(), data.getActSum()));
+            population.getChildren().add(createLineChart("Population", data.getPopulationDelta(), data.getPopulationSum()));
+            ecologicalDamage.getChildren().add(createLineChart("Ecological Damage", data.getEcologicalDamageDelta(), data.getEcologicalDamageSum()));
+            consumption.getChildren().add(createLineChart("Consumption", data.getConsumptionDelta(), data.getConsumptionSum()));
+            act.getChildren().add(createLineChart("Act", data.getActDelta(), data.getActSum()));
 
         } catch (Exception e) {
             data.compute(startValuePopu, startValueEco, startValueCons, startValueAct);
